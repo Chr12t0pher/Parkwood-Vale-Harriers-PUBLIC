@@ -1,0 +1,93 @@
+{% extends "auth.html" %}
+<head>
+	{% block title %}Register{% endblock %}
+    {% block css %}
+
+	{% endblock %}
+</head>
+<body>
+{% block body %}
+<div class="row-fluid">
+  <div class="col-md-5 col-lg-4 centering">
+    <div class="well">
+      <form class="form-horizontal" action="" method="POST" name="register">
+	    <fieldset>
+        {{ form.hidden_tag() }}
+        <h3 style="text-align:center; margin-top:0px;"><strong>Join the PVH WebApp</strong></h3><br>
+        <div class="form-group">
+        	<label for="inputName" class="col-md-3 control-label">Name</label>
+            <div class="col-md-9">
+                {{ form.name(class="form-control", **{"placeholder":"Name", "data-hint":"eg. John Smith", "required":""}) }}
+            </div>
+        </div>
+        <div class="form-group">
+        	<label for="inputUserName" class="col-md-3 control-label">Username</label>
+            <div class="col-md-9">
+                {{ form.username(class="form-control", **{"placeholder":"Username", "data-hint":"eg. JohnSmith", "required":""}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail" class="col-md-3 control-label">Email</label>
+            <div class="col-md-9">
+            	{{ form.email(class="form-control", **{"placeholder":"Email", "data-hint":"eg. johnsmith@gmail.com", "required":""}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-md-3 control-label">Password</label>
+            <div class="col-md-9">
+            	{{ form.password(class="form-control", **{"placeholder":"Password", "onChange":"form.confirm.pattern = this.value;", "required":""}) }}
+                <div style="margin-bottom: 12px"></div>
+                {{ form.confirm(class="form-control", **{"placeholder":"Confirm Password", "pattern":"", "title":"The passwords do not match.", "required":""}) }}
+        	</div>
+        </div>
+        <div class="form-group">
+        	<label for="inputPhoneNumber" class="col-md-3 control-label">Phone No.</label>
+            <div class="col-md-9">
+            	{{ form.phone_number(class="form-control", **{"placeholder":"Phone Number", "pattern":"^\s*\(?(020[78]?\)??[1-9][0-9]{2,3}?[0-9]{4})|(0[1-8][0-9]{3}\)??[1-9][0-9]{2}?[0-9]{3})\s*$", "data-hint":"eg. 07501848677", "required":""}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Address</label>
+            <div class="col-md-9">
+            	{{ form.address(class="form-control", **{"placeholder":"Address", "data-hint":"eg. 1 Fleet Street", "required":""}) }} <div style="margin-bottom: 12px"></div>
+                {{ form.town(class="form-control", **{"placeholder":"Town", "data-hint":"eg. Billericay", "required":""}) }} <div style="margin-bottom: 12px"></div>
+                {{ form.county(class="form-control", **{"placeholder":"County", "data-hint":"eg. Essex", "required":""}) }} <div style="margin-bottom: 12px"></div>
+                {{ form.postcode(class="form-control", **{"placeholder":"Postcode", "data-hint":"eg. CM12 0LE", "required":""}) }}
+            </div>
+        </div>
+        <div class="form-group">
+        	<label for="inputDob" class="col-md-3 control-label">Birthday</label>
+            <div class="col-md-9">
+            	{{ form.date_of_birth(class="form-control", **{"placeholder":"Date Of Birth", "pattern":"(((0[1-9]|[12][0-9]|3[01])([/])(0[13578]|10|12)([/])(\d{4}))|(([0][1-9]|[12][0-9]|30)([/])(0[469]|11)([/])(\d{4}))|((0[1-9]|1[0-9]|2[0-8])([/])(02)([/])(\d{4}))|((29)(\.|-|\/)(02)([/])([02468][048]00))|((29)([/])(02)([/])([13579][26]00))|((29)([/])(02)([/])([0-9][0-9][0][48]))|((29)([/])(02)([/])([0-9][0-9][2468][048]))|((29)([/])(02)([/])([0-9][0-9][13579][26])))", "data-hint":"eg. 31/12/1990", "required":""}) }}
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom:5px">
+        	<label class="col-md-3 control-label">Gender</label>
+            <div class="col-md-9">
+            	<div class="radio radio-primary">
+                	<label>
+                        <input type="radio" name="gender" id="gender-0" value="M" required>Male
+                    </label>
+                    <label class="pull-right">
+                    	<input type="radio" name="gender" id="gender-1" value="F" required>Female
+                    </label>
+            	</div>
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom:0px; margin-left:0px; margin-right:0px">
+        	<div class="center-block">
+        		<a href="home" style="padding-left:10px;padding-right:10px;" class="btn btn-default pull-left"><h4><i class="mdi-action-home"></i> Home </h4></a>
+                <div class="pull-right">
+                <button style="padding-left:10px;padding-right:10px;" type="reset" class="btn btn-default"><h4><i class="mdi-navigation-refresh"></i> Reset </h4></button>
+                <button style="padding-left:20px;padding-right:20px" type="submit" class="btn btn-primary"><h4> Submit <i class="mdi-navigation-arrow-forward"></i></h4></button>
+                </div>
+            </div>
+        </div>
+        </fieldset>
+	  </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+</body>
+</html>

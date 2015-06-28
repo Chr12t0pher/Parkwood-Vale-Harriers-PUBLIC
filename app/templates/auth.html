@@ -1,0 +1,52 @@
+<!DOCTYPE html><head>
+	{% block header %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{% block title %}{% endblock %} - Parkwood Vale Harriers</title>
+	<!-- Start Material Bootstrap CSS -->
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{ url_for("static", filename="css/ripples.min.css") }}" rel="stylesheet">
+	<link href="{{ url_for("static", filename="css/material-wfont.min.css") }}" rel="stylesheet">
+	<!-- End Material Bootstrap CSS -->
+    <!-- Start Custom CSS -->
+    <style>
+    html, body{height:100%; margin:0;padding:0}
+	.container-fluid{height:100%; display:table; width:100%; padding:0;background:radial-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url({{ url_for("static", filename="img/background.jpg") }});background-size:cover;}
+    .row-fluid {height: 100%; display:table-cell; vertical-align: middle;}
+    .centering {float:none; margin:0 auto;}
+    </style>
+    {% block css %}{% endblock %}
+    <!-- End Custom CSS -->
+    {% endblock %}
+</head>
+<body>
+<!-- Flash/Error Handler -->
+<style>.alertanimate {margin-top: -200px;overflow:hidden;position:absolute;opacity:0;transition:all 2s ease;}
+	   .alertanimate.in {margin-top: 0px;opacity:0.9}</style>
+{% if form.errors %}{% for field_name, field_errors in form.errors|dictsort if field_errors %}{% for error in field_errors %}<div id="flashalert" class="alert alert-warning alertanimate" style="margin-bottom:0px;width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">{{ error }}</div>{% endfor %}{% endfor %}{% endif %}
+
+{% with msgs = get_flashed_messages(with_categories=true) %}{% if msgs %}{% for category, msg in msgs %}
+	<div id="flashalert" class="alert alert-{{ category }} alertanimate" style="margin-bottom:0px;width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">{{ msg }}</div>
+{% endfor -%}{% endif %}{% endwith %}
+<!-- Start Site -->
+<div class="container-fluid">{% block body %}{% endblock %}</div>
+<!-- End Site -->
+<!-- Start Material Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="{{ url_for("static", filename="js/ripples.min.js") }}"></script>
+<script src="{{ url_for("static", filename="js/material.min.js") }}"></script>
+<script>
+$(document).ready(function() {
+    $.material.init();
+});
+</script>
+<script>
+$(document).ready(function() {
+	$("#flashalert").toggleClass("in");
+	setTimeout(function() {
+		$("#flashalert").toggleClass("in");}, 8000);
+});
+</script>
+<!-- End Material Bootstrap JS -->
+<!-- Start Custom JS -->{% block js %}{% endblock %}<!-- End Custom JS -->
+</body>

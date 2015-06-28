@@ -1,0 +1,33 @@
+{% extends "admin.html" %}
+{% set active_page = "viewtraining" %}
+{% block title %}View Training{% endblock %}
+{% block jumbotron_header %}View Training{% endblock %}
+{% block jumbotron_text %}See all Runners training history here.{% endblock %}
+{% block main %}
+    <table class="table table-striped table-hover well">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Hours Trained</th>
+            <th>Calories Burnt</th>
+            <th>Date</th>
+            <th>Training Type</th>
+            <th>Distance</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in training %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td><a href="../{{ i.username }}">{{ i.username }}</a></td>  <!--TODO User pages -->
+                    <td>{{ i.hours_trained }} hrs</td>
+                    <td>{{ i.calories_burnt }} kcal</td>
+                    <td>{{ i.date }}</td>
+                    <td>{% if i.training_type == "running" %}Running{% elif i.training_type == "cycling" %}Cycling{% else %}Swimming{% endif %}</td>
+                    <td>{{ i.distance }} km</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

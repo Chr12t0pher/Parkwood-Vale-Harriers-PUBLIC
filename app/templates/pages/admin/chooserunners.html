@@ -1,0 +1,29 @@
+{% extends "admin.html" %}
+{% set active_page = "chooserunners" %}
+{% block title %}Choose Runners{% endblock %}
+{% block jumbotron_header %}Choose Runners{% endblock %}
+{% block jumbotron_text %}Choose the runners who will be participating in the event.{% endblock %}
+{% block main %}
+    <table class="table table-striped table-hover well">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Calories Burnt</th>
+            <th>Distance</th>
+            <th>Hours</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in runners %}
+            <tr>
+                <td><a href="/app/user/{{ i["username"] }}">{{ i["name"] }}</a></td>
+                <td>{{ i["training_calories_"] }}</td>
+                <td>{{ i["training_distance"] }}</td>
+                <td>{{ i["training_hours"] }}</td>
+                <td>{{ i["rank"] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

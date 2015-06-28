@@ -1,0 +1,100 @@
+{% extends "webapp.html" %}
+{% set active_page = "home" %}
+{% block title %}Home{% endblock %}
+{% block jumbotron_header %}Overview{% endblock %}
+{% block jumbotron_text %}Welcome to the PVH Web App! Use the sidebar to navigate around the site.{% endblock %}
+{% block main %}
+    <div class="row">
+        <h2 class="sub-header">Calories Burnt</h2>
+        <div class="row">
+            <div class="col-md-1">
+               <strong>Leader:</strong>
+            </div>
+            <div class="col-md-11">
+               <div class="progress" style="height: 20px">
+                   <div class="progress-bar progress-bar-warning" style="width: 90%;"></div>
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+               <strong>You:</strong>
+            </div>
+            <div class="col-md-11">
+               <div class="progress" style="height: 20px">
+                   <div class="progress-bar progress-bar-success" style="width: {{ percentages["calories"] }}%;"></div>
+               </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h2 class="sub-header">Distance Run</h2>
+        <div class="row">
+            <div class="col-md-1">
+               <strong>Leader:</strong>
+            </div>
+            <div class="col-md-11">
+               <div class="progress" style="height: 20px">
+                   <div class="progress-bar progress-bar-warning" style="width: 90%;"></div>
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+               <strong>You:</strong>
+            </div>
+            <div class="col-md-11">
+               <div class="progress" style="height: 20px">
+                   <div class="progress-bar progress-bar-success" style="width: {{ percentages["running"] }}%;"></div>
+               </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h2 class="sub-header">Distance Cycled</h2>
+        <div class="row">
+            <div class="col-md-1">
+               <strong>Leader:</strong>
+            </div>
+            <div class="col-md-11">
+               <div class="progress" style="height: 20px">
+                   <div class="progress-bar progress-bar-warning" style="width: 90%;"></div>
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+               <strong>You:</strong>
+            </div>
+            <div class="col-md-11">
+               <div class="progress" style="height: 20px">
+                   <div class="progress-bar progress-bar-success" style="width: {{ percentages["cycling"] }}%;"></div>
+               </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h2 class="sub-header">Distance Swam</h2>
+        <div class="row">
+            <div class="col-md-1">
+               <strong>Leader:</strong>
+            </div>
+            <div class="col-md-11">
+               <div class="progress" style="height: 20px">
+                   <div class="progress-bar progress-bar-warning" style="width: 90%;"></div>
+                   <div class="progress-bar progress-bar-warning" style="width: 90%;"></div>
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+               <strong>You:</strong>
+            </div>
+            <div class="col-md-11">
+               <div class="progress" style="height: 20px">
+                   <div class="progress-bar progress-bar-success" style="width: {{ percentages["swimming"] }}%;"></div>
+               </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

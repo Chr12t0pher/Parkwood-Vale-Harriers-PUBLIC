@@ -1,0 +1,53 @@
+{% extends "auth.html" %}
+	{% block title %}Login{% endblock %}
+    {% block css %}
+
+	{% endblock %}
+{% block body %}
+<div class="row-fluid">
+  <div class="col-md-4 col-lg-3 centering">
+    <div class="well bs-component">
+      <form class="form-horizontal" method="POST" name="login">
+	    <fieldset>
+        {{ form.hidden_tag() }}
+        <h3 style="text-align:center; margin-top:0px;"><strong>Enter the PVH WebApp</strong></h3><h6 style="text-align: center">Username:"demo" Password:"password"</h6>
+        <div class="form-group">
+        	<label for="inputName" class="col-md-4 col-lg-3 control-label">Username</label>
+            <div class="col-md-8 col-lg-9">
+            	{{ form.username(class="form-control", **{"placeholder":"Username", "title":"Enter your username.", "required":""}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-md-4 col-lg-3 control-label">Password</label>
+            <div class="col-md-8 col-lg-9">
+            	{{ form.password(class="form-control", **{"placeholder":"Password", "required":""}) }}
+        	</div>
+        </div>
+        <div class="form-group" style="margin-bottom: 5px">
+          <div class="col-md-3"></div>
+          <div class="col-md-9">
+            <div class="togglebutton pull-left">
+              <label>
+              	{{ form.remember_me }} Remember Me <a href="" data-toggle="tooltip" title="Don't tick if you're on a shared computer."><i class="mdi-communication-live-help"></i></a>
+              </label>
+            </div>
+          </div>
+        </div>
+       <a href="home" style="padding-left:15px;padding-right:15px" class="btn btn-default"><h4><i class="mdi-action-home"></i> Home </h4></a>
+       <button style="padding-left:15px;padding-right:15px" type="submit" class="btn btn-primary btn-raised pull-right"><h4> Log In <i class="mdi-navigation-arrow-forward"></i></h4></button>
+       </fieldset>
+	  </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript"> // JS for the Remember Me tooltip.
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip({
+        placement : 'right',
+		template : '<div class="tooltip" role="tooltip" style="width:200px"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+    });
+});
+</script>
+{% endblock %}

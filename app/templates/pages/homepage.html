@@ -1,0 +1,86 @@
+<!DOCTYPE html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Home - Parkwood Vale Harriers</title>
+	<!-- Start Material Bootstrap CSS -->
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{ url_for("static", filename="css/ripples.min.css") }}" rel="stylesheet">
+	<link href="{{ url_for("static", filename="css/material-wfont.min.css") }}" rel="stylesheet">
+	<!-- End Material Bootstrap CSS -->
+    <!-- Start Custom CSS -->
+    <link href="{{ url_for("static", filename="css/snackbar.min.css") }}" rel=stylesheet>
+    <style>.navbar-inverse .navbar-brand, .navbar-inverse .navbar-brand:hover {background-color: #009587;}</style>
+    <!-- End Custom CSS -->
+</head>
+<body>
+<!-- Flash Handler -->
+<style>.alertanimate {bottom:0;position:absolute;;opacity:0;transition:all 2s ease;}
+	   .alertanimate.in {opacity:0.8}</style>
+{% with msgs = get_flashed_messages(with_categories=true) %}{% if msgs %}{% for category, msg in msgs %}
+	<div id="flashalert" class="alert alert-{{ category }} alertanimate" style="margin-bottom:0px;width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">{{ msg }}</div>
+{% endfor -%}{% endif %}{% endwith %}
+<!-- Start Site -->
+<div class="container-fluid" >
+  <!-- Navbar -->
+  <div class="navbar navbar-inverse shadow-z-2" style="margin-top:20px">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand shadow-z-2">PVH Web App</div>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav navbar-right">
+        	{% if g.user.is_authenticated() %}
+            <li><a href="logout">Logout</a></li>
+            <li class="btn-primary shadow-z-2"><a href="app">Enter</a></li>
+            {% else %}
+            <li><a href="register">Register</a></li>
+            <li class="btn-primary shadow-z-2"><a href="login">Enter</a></li>
+            {% endif %}
+        </ul>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="row">
+  	<div class="jumbotron shadow-z-4" style="margin-bottom: 10px;">
+      	<h1>Welcome {% if g.user.is_authenticated() %}{{ user.name }}{% else %}Runners{% endif %}!</h1><div class="pull-right">{% if g.user.is_authenticated() %}<a href="app"{% else %}<a href="login"{% endif %} class="btn btn-primary"> Enter The App </a></div>
+        <p>This is the new Parkwood Vale Harriers management system.</p>
+    </div>
+  </div>
+</div>
+<!-- End Site -->
+<!-- Start Material Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="{{ url_for("static", filename="js/ripples.min.js") }}"></script>
+<script src="{{ url_for("static", filename="js/material.min.js") }}"></script>
+<script>
+$(document).ready(function() {
+    $.material.init();
+});
+</script>
+<script>
+$(document).ready(function() {
+	$("#flashalert").toggleClass("in");
+	setTimeout(function() {
+		$("#flashalert").toggleClass("in");}, 8000);
+});
+</script>
+<script src={{ url_for("static", filename="js/snackbar.min.js") }}></script>
+<script>
+var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+var isChrome = !!window.chrome && !isOpera; // isOpera & isChrome by Rob W on Stackoverflow - http://stackoverflow.com/users/938089/rob-w
+
+$(function() {
+if (isChrome == false) { console.log(isChrome); $.snackbar({content: "Made with Google Chrome v40 for Desktop. Download it <a href=\"https://www.google.com/chrome/browser/desktop/\">here</a> for the best experience.<br> This app has not been tested on other browsers, your experience may vary.<br>Click to dismiss.</a>", timeout: 0})};
+});
+</script>
+<!-- End Material Bootstrap JS -->
+<!-- Start Custom JS -->
+
+<!-- End Custom JS -->
+</body>
+</html>

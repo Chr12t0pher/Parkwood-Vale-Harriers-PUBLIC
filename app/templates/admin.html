@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title %}{%  endblock %} - PVH WebApp</title>
+    <!-- Start Material Bootstrap CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{ url_for("static", filename="css/ripples.min.css") }}" rel="stylesheet">
+	<link href="{{ url_for("static", filename="css/material-wfont.min.css") }}" rel="stylesheet">
+    <!-- WebApp CSS -->
+    <link href="{{ url_for("static", filename="css/app.css") }}" rel="stylesheet">
+    {% block css %}{% endblock %}
+  </head>
+
+  <body style="padding-top:0;">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Start Sidebar -->
+        <div class="col-sm-3 col-md-2 sidebar shadow-z-3" style="top:0;border-right-width:0">
+          <ul class="nav nav-sidebar">
+              <li><a class="btn btn-material-indigo btn-lg shadow-z-2" style="width:100%; margin-right:0;margin-left:0;margin-top:0;border-radius:0">Organiser Panel</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li {% if "home" == active_page %}class="active"{% endif %}><a href="{{ url_for("admin.home") }}"><strong><i class="mdi-action-home"></i> Home</strong></a></li>
+            <li {% if "viewtraining" == active_page %}class="active"{% endif %}><a href="{{ url_for("admin.view_training") }}"><i class="mdi-file-folder-open"></i> View Training</a></li>
+            <li {% if "viewusers" == active_page %}class="active"{% endif %}><a href="{{ url_for("admin.view_users") }}"><i class="mdi-action-account-child"></i> View Users</a></li>
+            <li {% if "chooserunners" == active_page %}class="active"{% endif %}><a href="{{ url_for("admin.choose_runners") }}"><i class="mdi-communication-contacts"></i> Choose Runners</a></li>
+            <li><a href="{{ url_for("webapp.home") }}"><i class="mdi-av-fast-rewind"></i> Back To Runner Panel</a></li>
+            <li><a href="{{ url_for("auth.logout") }}"><i class="mdi-navigation-arrow-back"></i> Logout</a></li>
+          </ul>
+        </div>
+        <!-- End Sidebar -->
+
+        <!-- Start Content -->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="top:0">
+          <div class="jumbotron shadow-z-2 well">
+              <h1>{% block jumbotron_header %}{% endblock %}</h1>
+              <p>{% block jumbotron_text %}{% endblock %}</p>
+          </div>
+
+          <!-- Start Main -->
+          {% block main %}
+
+          {% endblock %}
+          <!-- End Main -->
+          <!-- Flash/Error Handler -->
+    <style>.alertanimate {bottom:0;position:absolute;;opacity:0;transition:all 2s ease;}.alertanimate.in {margin-top: 0;opacity:0.9}</style>
+    {% with msgs = get_flashed_messages(with_categories=true) %}{% if msgs %}{% for category, msg in msgs %}
+	    <div id="flashalert" class="alert alert-{{ category }} alertanimate" style="margin-bottom:0;width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">{{ msg }}</div>
+    {% endfor -%}{% endif %}{% endwith %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Start Material Bootstrap JS -->
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="{{ url_for("static", filename="js/ripples.min.js") }}"></script>
+    <script src="{{ url_for("static", filename="js/material.min.js") }}"></script>
+    <script>
+    $(document).ready(function() {
+        $.material.init();
+    });
+    </script>
+    <!-- End Material Bootstrap JS -->
+    <script>
+    $(document).ready(function() {
+	$("#flashalert").toggleClass("in");
+	setTimeout(function() {
+		$("#flashalert").toggleClass("in");}, 8000);
+    });
+    </script>
+    {% block js %}{% endblock %}
+  </body>

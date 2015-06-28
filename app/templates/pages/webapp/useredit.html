@@ -1,0 +1,83 @@
+{% extends "webapp.html" %}
+{% set active_page = "edit" %}
+{% block title %}Edit Profile{% endblock %}
+{% block jumbotron_header %}Edit Profile{% endblock %}
+{% block jumbotron_text %}Add or change your profile picture, set medical details and more.{% endblock %}
+{% block formerrors %}{% if userform.errors %}{% for field_name, field_errors in userform.errors|dictsort if field_errors %}{% for error in field_errors %}<div id="flashalert" class="alert alert-warning alertanimate" style="bottom:0;width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">{{ error }}</div>{% endfor %}{% endfor %}{% endif %}{% endblock %}
+{% block main %}
+    <div class="row">
+    <form class="form-horizontal well col-md-6" action="updateuser" method="POST" name="useredit">
+	    <fieldset>
+        {{ userform.hidden_tag() }}
+        <div class="form-group">
+        	<label for="inputName" class="col-md-3 control-label">Name</label>
+            <div class="col-md-9">
+                {{ userform.name(class="form-control", **{"placeholder":user.name, "data-hint":"eg. John Smith"}) }}
+            </div>
+        </div>
+        <div class="form-group">
+        	<label for="inputUserName" class="col-md-3 control-label">Username</label>
+            <div class="col-md-9">
+                {{ userform.username(class="form-control", **{"placeholder":user.username, "data-hint":"eg. JohnSmith"}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail" class="col-md-3 control-label">Email</label>
+            <div class="col-md-9">
+            	{{ userform.email(class="form-control", **{"placeholder":user.email, "data-hint":"eg. johnsmith@gmail.com"}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-md-3 control-label">Password</label>
+            <div class="col-md-9">
+                {{ userform.oldpassword(class="form-control", **{"placeholder":"Old Password", "required":""}) }}
+                <div style="margin-bottom: 12px"></div>
+            	{{ userform.newpassword(class="form-control", **{"placeholder":"New Password", "onChange":"userform.confirm.pattern = this.value;"}) }}
+                <div style="margin-bottom: 12px"></div>
+                {{ userform.confirm(class="form-control", **{"placeholder":"Confirm Password", "pattern":"", "title":"The passwords do not match."}) }}
+        	</div>
+        </div>
+        <div class="form-group">
+        	<label for="inputPhoneNumber" class="col-md-3 control-label">Phone No.</label>
+            <div class="col-md-9">
+            	{{ userform.phone_number(class="form-control", **{"placeholder":user.phone_number, "pattern":"^$|^\s*\(?(020[78]?\)??[1-9][0-9]{2,3}?[0-9]{4})|(0[1-8][0-9]{3}\)??[1-9][0-9]{2}?[0-9]{3})\s*$", "data-hint":"eg. 07501848677"}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Address</label>
+            <div class="col-md-9">
+            	{{ userform.address(class="form-control", **{"placeholder":user.address, "data-hint":"eg. 1 Fleet Street"}) }} <div style="margin-bottom: 12px"></div>
+                {{ userform.town(class="form-control", **{"placeholder":user.town, "data-hint":"eg. Billericay"}) }} <div style="margin-bottom: 12px"></div>
+                {{ userform.county(class="form-control", **{"placeholder":user.county, "data-hint":"eg. Essex"}) }} <div style="margin-bottom: 12px"></div>
+                {{ userform.postcode(class="form-control", **{"placeholder":user.postcode, "data-hint":"eg. CM12 0LE"}) }}
+            </div>
+        </div>
+        <div class="form-group">
+        	<label for="inputDob" class="col-md-3 control-label">Birthday</label>
+            <div class="col-md-9">
+            	{{ userform.date_of_birth(class="form-control", **{"placeholder":user.date_of_birth, "pattern":"^$|(((0[1-9]|[12][0-9]|3[01])([/])(0[13578]|10|12)([/])(\d{4}))|(([0][1-9]|[12][0-9]|30)([/])(0[469]|11)([/])(\d{4}))|((0[1-9]|1[0-9]|2[0-8])([/])(02)([/])(\d{4}))|((29)(\.|-|\/)(02)([/])([02468][048]00))|((29)([/])(02)([/])([13579][26]00))|((29)([/])(02)([/])([0-9][0-9][0][48]))|((29)([/])(02)([/])([0-9][0-9][2468][048]))|((29)([/])(02)([/])([0-9][0-9][13579][26])))", "data-hint":"eg. 31/12/1990"}) }}
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom:5px">
+        	<label class="col-md-3 control-label">Gender</label>
+            <div class="col-md-9">
+            	<div class="radio radio-primary">
+                	<label>
+                        <input type="radio" name="gender" id="gender-0" value="M" {% if user.gender == "M" %}checked{% endif %}>Male
+                    </label>
+                    <label class="pull-right">
+                    	<input type="radio" name="gender" id="gender-1" value="F" {% if user.gender == "F" %}checked{% endif %}>Female
+                    </label>
+            	</div>
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom:0px; margin-left:0px; margin-right:0px">
+        	<div class="center-block pull-right">
+                <button style="padding-left:10px;padding-right:10px;" type="reset" class="btn btn-default"><h4><i class="mdi-navigation-refresh"></i> Reset </h4></button>
+                <button style="padding-left:20px;padding-right:20px" type="submit" class="btn btn-primary"><h4> Submit <i class="mdi-navigation-arrow-forward"></i></h4></button>
+            </div>
+        </div>
+        </fieldset>
+	  </form>
+    </div>
+{% endblock %}
